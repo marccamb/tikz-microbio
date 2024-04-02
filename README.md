@@ -1,6 +1,8 @@
 # tikz-microbio
 A set of tikz drawing for microbiology-related drawings
 
+![Examples](example.png)
+
 ```
 \documentclass[11pt]{standalone}                                                                                                                                                                                   
 \usepackage[utf8]{inputenc}                                                                                                                                                                                        
@@ -37,5 +39,3 @@ A set of tikz drawing for microbiology-related drawings
 \end{tikzpicture}                                                                                                                                                                                                  
 \end{document}                                         
 ```
-
-![Examples](./example.pdf)
