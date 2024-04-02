@@ -38,4 +38,4 @@ A set of tikz drawing for microbiology-related drawings
 \end{document}                                         
 ```
 
-![](example.pdf)
+![Examples](./example.pdf)
