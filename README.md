@@ -1,16 +1,26 @@
 # tikz-microbio
 A set of tikz drawings for microbiology-related figures.
 
-Note that some tikz libraries are required for some of the drawings.
+### Tikz libraries
+- `\bacteria` requires to load the [`decoration.pathmorphing` tikz library](https://tikz.dev/tikz-decorations)
+- `\bactpattern` requires to load the [`pattern` tikz library](https://tikz.dev/library-patterns).
 
+### Arguments
 Most functions require 3 arguments:
 1. a scale factor
 2. a color
 3. a name for the node containing the image (facultative)
+4. the name of a [`pattern`](https://tikz.dev/library-patterns) for `\bactpattern`
 
-`\bactpattern` requires a forth argument with the name of the pattern from the [`pattern` tikz library](https://tikz.dev/library-patterns).
+### Usage
 
+```
+\bacterium{0.5}{blue}{bact1}
+```
 The code from `tikz_drawings.tex` can be pasted into the preamble of the document, or added with the `\input{}` command (see example below).
+
+
+### Example
 
 ![](example.png)
 
