@@ -1,39 +1,59 @@
 # tikz-microbio
-A set of tikz drawing for microbiology-related drawings
+A set of tikz drawings for microbiology-related figures.
 
-![Examples](example.png)
+Note that some tikz libraries are required for some of the drawings.
+
+Most functions require 3 arguments:
+1. a scale factor
+2. a color
+3. a name for the node containing the image (facultative)
+
+`\bactpattern` requires a forth argument with the name of the pattern from the [`pattern` tikz library](https://tikz.dev/library-patterns).
+
+The code from `tikz_drawings.tex` can be pasted into the preamble of the document, or added with the `\input{}` command (see example below).
+
+![](example.png)
 
 ```
 \documentclass[11pt]{standalone}                                                                                                                                                                                   
-\usepackage[utf8]{inputenc}                                                                                                                                                                                        
-                                                                                                                                                                                                             
+\usepackage[utf8]{inputenc}
 \usepackage{tikz}                                                                                                                                                                                                  
 \usetikzlibrary{calc, arrows, patterns, decorations.pathmorphing}                                                                                                                                                  
                                                                                                                                                                                    
-\input{tikz_drawings.tex}                                                                                                                                                                                                                                                                                                                                                                                   
-\begin{document}                                                                                                                                                                                                   
-\begin{tikzpicture}                                                                                                                                                                                                
-  \path (0,0) \assembly{0.7}{violet}{a};                                                                                                                                                                           
-  \path (a.south) node[anchor=north] {\ttfamily \textbackslash assembly};                                                                                                                                          
-  \path (3,0) \bacteria{0.5}{teal}{b};                                                                                                                                                                             
-  \path (b.south) node[anchor=north] {\ttfamily \textbackslash bacteria};                                                                                                                                          
-  \path (6,0) \bacterium{0.5}{purple}{c};                                                                                                                                                                          
-  \path (c.south) node[anchor=north] {\ttfamily \textbackslash bacterium};                                                                                                                                         
-  \path (9,0) \bactpattern{0.5}{pink}{d}{dots};                                                                                                                                                                    
-  \path (d.south) node[anchor=north] {\ttfamily \textbackslash bactpattern};                                                                                                                                       
+\input{tikz_drawings.tex}
+                                                            
+\begin{document}
+\begin{tikzpicture}
+  \path (0,0) \assembly{0.7}{violet}{a};
+  \path (a.south) node[anchor=north] {\ttfamily \textbackslash assembly};
+
+  \path (3,0) \bacteria{0.5}{teal}{b};
+  \path (b.south) node[anchor=north] {\ttfamily \textbackslash bacteria};
+
+  \path (6,0) \bacterium{0.5}{purple}{c};
+  \path (c.south) node[anchor=north] {\ttfamily \textbackslash bacterium};
+
+  \path (9,0) \bactpattern{0.5}{pink}{d}{dots}; 
+  \path (d.south) node[anchor=north] {\ttfamily \textbackslash bactpattern};
+                                                                                                                                       
   \path (12,0) \dna{1}{orange}{e};                                                                                                                                                                                 
-  \path (e.south) node[anchor=north] {\ttfamily \textbackslash dna};                                                                                                                                               
+  \path (e.south) node[anchor=north] {\ttfamily \textbackslash dna};
+                                                                                                                                             
   \path (15,0) \eppendorf{1}{cyan}{f};                                                                                                                                                                             
   \path (f.south) node[anchor=north] {\ttfamily \textbackslash eppendorf};                                                                                                                                         
                                                                                                                                                                                                                    
   \path (0,-3) \gear{0.5}{gray}{g};                                                                                                                                                                                
-  \path (g.south) node[anchor=north] {\ttfamily \textbackslash gear};                                                                                                                                              
+  \path (g.south) node[anchor=north] {\ttfamily \textbackslash gear};
+                                                                                                                                             
   \path (3,-3) \metamod{0.2}{magenta}{h};                                                                                                                                                                          
-  \path (h.south) node[anchor=north] {\ttfamily \textbackslash metamod};                                                                                                                                           
+  \path (h.south) node[anchor=north] {\ttfamily \textbackslash metamod};
+                                                                                                                                     
   \path (6,-3) \molecule{2}{olive}{i};                                                                                                                                                                             
-  \path (i.south) node[anchor=north] {\ttfamily \textbackslash molecule};                                                                                                                                          
+  \path (i.south) node[anchor=north] {\ttfamily \textbackslash molecule};
+                                                                                                                                 
   \path (9,-3) \petri{1}{brown}{j};                                                                                                                                                                                
-  \path (j.south) node[anchor=north] {\ttfamily \textbackslash petri};                                                                                                                                             
+  \path (j.south) node[anchor=north] {\ttfamily \textbackslash petri};
+                                                                                                                                    
   \path (12,-3) \tube{0.4}{lime}{k};                                                                                                                                                                               
   \path (k.south) node[anchor=north] {\ttfamily \textbackslash tube};                                                                                                                                              
 \end{tikzpicture}                                                                                                                                                                                                  
