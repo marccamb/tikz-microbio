@@ -1,0 +1,183 @@
+% Load the following Tikz library:
+%\usetikzlibrary{calc, arrows, patterns, decorations.pathmorphing}
+
+%% I really need to recode this
+\newcommand{\assembly}[3]{
+  coordinate (center);
+  \begin{scope}[darkgray, scale=#1, shift=(center)]
+ 	 \draw[line width=1.2mm*#1, #2] (-0.8,0)--(1.5,0);
+ 	 \draw[line width=1.2mm*#1, #2] (-1.4,-0.3)--++(2,0);
+ 	 \draw[line width=1.2mm*#1, #2] (-1.5,0.3)--++(2.2,0);
+ \end{scope}
+ \path (center) node[minimum width=3.5cm*#1,minimum height=1.25cm*#1] (#3) {};
+}
+
+\newcommand{\bacteria}[3]{
+  coordinate (bacteriacenter);
+  %\path (A)+(-1*#1,1*#1) coordinate (bacteriacenter);
+  \path(bacteriacenter)+(-0.8*#1,-0.3*#1) \bacterium{#1}{#2}{p1};
+  \path(bacteriacenter)+(0.8*#1,0.6*#1) \bacterium{#1}{#2}{p2};
+  \path(bacteriacenter)+(0*#1,-0.9*#1) \bacterium{#1}{#2}{p3};
+  \path (bacteriacenter) node[inner sep=11ex*#1] (#3) {};
+}
+
+\newcommand{\bacterium}[3]{
+  coordinate (A);
+  \begin{scope}[rotate=45,line width=0.8mm*#1, darkgray]
+    \path (A)++(-0.3*#1,-0.4*#1) coordinate (B);
+    \draw[transform shape, rounded corners=9*#1, fill=#2](B) rectangle++(1.5*#1,.65*#1);  
+    \draw[transform shape, decorate,decoration={snake,segment length=6mm*#1,amplitude=0.5mm*#1}](B)++(0*#1,.75*.5*#1)--++(-1*#1,0*#1);
+    \draw[transform shape, decorate,decoration={snake,segment length=6mm*#1,amplitude=0.5mm*#1}](B)++(0*#1,.75*.5*#1)--++(-0.8*#1,0.5*#1);
+    \path (A) node[inner sep=8ex*#1] (#3) {};
+  \end{scope}
+}
+
+\newcommand{\bactpattern}[4]{
+  coordinate (A);
+  \begin{scope}[yscale=1,xscale=-1, rotate=45,line width=0.8mm*#1, darkgray]
+    \path (A)++(-0.3*#1,-0.4*#1) coordinate (B);
+    \draw[transform shape, rounded corners=9*#1,preaction={fill, #2}, pattern=#4, pattern color=#2!50!black](B) rectangle++(1.5*#1,.65*#1);  
+    \draw[transform shape, decorate,decoration={snake,segment length=6mm*#1,amplitude=0.5mm*#1}](B)++(0*#1,.75*.5*#1)--++(-1*#1,0*#1);
+    \draw[transform shape, decorate,decoration={snake,segment length=6mm*#1,amplitude=0.5mm*#1}](B)++(0*#1,.75*.5*#1)--++(-0.8*#1,0.5*#1);
+    \path (A) node[inner sep=8ex*#1] (#3) {};
+  \end{scope}
+}
+
+\newcommand{\dna}[3] {
+  coordinate (center);  
+  
+  \begin{scope}[#2,scale=#1,
+    decoration={coil}, % #2 is a color name
+    dna/.style={decorate,line width=0.5mm*#1,
+      decoration={aspect=0, segment length=1cm*#1}},
+      line width=0.5mm*#1
+    ]
+    
+    \path (center)+(-0,-0.75)  coordinate (tip);
+    \clip (tip)+(-0.5,0.2) rectangle +(0.5,1.3);
+    \draw[dna, decoration={amplitude=.15cm*#1}] (tip) -- +(0,1.5);
+    \draw[dna, decoration={amplitude=-.15cm*#1}] (tip) -- +(0,1.5);
+    
+    \draw[<->,>=round cap] (tip)+(-0.15,1.2) -- +(0.05,1.2) ;
+    \draw[<->,>=round cap] (tip)+(-0.145,0.68) -- +(0.05,0.68) ;
+    \draw[<->,>=round cap] (tip)+(-0.07,+0.82) -- +(0.145,0.82) ;
+    \draw[<->,>=round cap] (tip)+(-0.07,+0.3) -- +(0.15,0.3) ;
+  \end{scope}
+  \path (center) node[minimum width=0.5cm*#1,minimum height=1.5cm*#1,rectangle] (#3) {};
+}
+
+\newcommand{\eppendorf}[3] {
+  coordinate (center);
+  \begin{scope}[scale=#1,line width=1.2pt*#1, darkgray]
+  \path (center)+(-0.2,+0.3)  coordinate (topleft);
+  \path (center)+(+0.2,+0.3)  coordinate (topright);
+  \path (center)+(0,-1.25)     coordinate (tip);
+  \path (tip)+(-0.2,0)  coordinate (bottomleft);
+  \path (tip)+(+0.2,0)  coordinate (bottomright);
+
+  \def\tube{-- ++(0.4,0) -- ++(0,-0.75) .. controls (tip) .. ++(-0.4,0) --cycle};
+
+  \begin{scope}
+    \clip (topleft)+(0,-0.3) rectangle (bottomright);
+    % \shade[ball color=blue!20!white] (topleft) \tube;
+    \fill[#2] (topleft) \tube;
+  \end{scope}
+  \draw (topleft) \tube;
+  \draw (topleft)+(0,-0.4) --+ (0.15,-0.4);
+  \draw (topleft)+(0,-0.6) --+ (0.15,-0.6);
+  \draw[rotate around={130:(topleft)}] (topleft)++(-0,0)  rectangle ++(0.6,0.1);
+
+  \path (tip)+(0,0.91)  node [minimum width=0.6cm*#1,minimum height=1.45cm*#1,rectangle] (#3) {};
+\end{scope}
+}
+
+% adapted from Caramdir's code on this page: https://tex.stackexchange.com/questions/58702/creating-gears-in-tikz
+\newcommand{\gear}[3]{
+  coordinate (center);
+  \begin{scope}[darkgray, shift=(center)]
+    \def\teeth{10}
+    \def\innerRadius{1cm*#1}
+    \def\outerRadius{1.3cm*#1}
+    \pgfmathsetmacro\angle{360/(2*\teeth)}
+    
+    \path (0,0) node[draw, circle, fill=#2,  inner sep=0pt, outer sep=0pt, minimum width=2cm*#1] {};
+    \foreach \i in {1,2,...,\teeth} {
+      \draw[fill=#2] ({\i*\angle*2}:\innerRadius)
+      -- ({(2*\i+0.5)*\angle}:\outerRadius) 
+      arc [radius=\outerRadius, start angle={(2*\i+0.5)*\angle}, end angle={(2*\i+.9)*\angle}]
+      -- ({(2*\i+1.4)*\angle}:\innerRadius) 
+      arc [radius=\innerRadius, start angle={(2*\i+1.4)*\angle}, end angle={(2*\i+2)*\angle}];
+    }
+  \end{scope}
+  \path (center) node[draw, darkgray, circle,  inner sep=0pt, outer sep=0pt, minimum width=1cm*#1, fill=white] {};
+  \path (center) node[minimum width=3cm*#1,minimum height=3cm*#1] (#3) {};
+}
+
+\newcommand{\metamod}[3] {
+  coordinate (nodecenter);
+  \path (nodecenter)+(0.5*#1,-3*#1) coordinate (center);
+  
+  \def \n {8}
+  \def \radius {#1*2cm}
+  
+  \begin{scope}[#2, line width=3pt*#1, inner sep=5pt*#1]
+    \foreach \s in {1,...,\n}
+    {
+      \path (center)++({360/\n * (\s - 1)}:\radius) node[draw, fill=#2, circle] (p\s) {};
+      \draw (center)++({360/\n * (\s - 1)}:\radius) 
+      arc ({360/\n * (\s - 1)}:{360/\n * (\s)}:\radius);
+    }
+    \foreach \s in {1,...,4}
+    {
+      \path (p3)++(0,\s*1.5*#1) node[draw, fill=#2, circle] (p2\s) {};
+    }
+    \draw (p3) -- (p24);
+    \draw (p22) -- ++ (1.5*#1,0) node[draw, fill=#2, circle] {};
+    \draw (p21) -- ++ (-1.5*#1,0) node[draw, fill=#2, circle] (p31) {} --++ (-1.5*#1,0) node[draw, fill=#2, circle] {} --++ (0,1.5*#1) node[draw, fill=#2, circle] {} -- (p31);
+  \end{scope}
+  \path (nodecenter)  node [minimum width=6cm*#1,minimum height=11cm*#1,rectangle] (#3) {};
+}
+
+\newcommand{\molecule}[3] {
+  coordinate (center);
+  \begin{scope}[scale=#1, #2, line width=1.5pt*#1]
+    \path (center) node[draw, circle, draw=#2, fill, inner sep=3pt*#1] (1) {};
+    \draw[lightgray] (1) -- +(0.3,0.4) node[draw, circle, #2, fill, inner sep=2pt*#1] {};
+    \draw[lightgray] (1) -- +(-0.2,0.3) node[draw, circle, #2, fill, inner sep=2pt*#1] {};
+    \draw[lightgray] (1) -- +(-0.1,-0.4) node[draw, circle, #2, fill, inner sep=2pt*#1] {};
+    \path (center) node [minimum width=0.8cm*#1,minimum height=1cm*#1,rectangle] (#3) {};
+\end{scope}
+}
+
+\newcommand{\petri}[3]{
+  coordinate (A);
+  \begin{scope}[scale=#1, darkgray]
+    \path (A)+(0,0) coordinate (B);
+    \fill[color=#2] (B)++(-0.75,0) arc (180:0:0.75 and 0.3) --++ (0,-0.2) arc (0:-180:0.75 and 0.3);
+    \fill[color=#2!90!black] (B)++(0,0) ellipse (0.75 and .3);
+    \begin{scope}[line width=0.5pt*#1, draw=#2!80!yellow!70!black, fill=#2!70!yellow!80!white]
+      \draw[fill] (B)++(0.6,0) ellipse (0.06 and .02);
+      \draw[fill] (B)++(0.2,-0.1) ellipse (0.05 and .017);
+      \draw[fill] (B)++(-0.2,0.1) ellipse (0.075 and .03);
+      \draw[fill] (B)++(-0.3,0) ellipse (0.075 and .03);
+      \draw[fill] (B)++(-.25,-0.14) ellipse (0.075 and .03);
+      \draw[fill] (B)++(.25,0.14) ellipse (0.075 and .03);
+      \draw[fill] (B)++(-.5,-0.05) ellipse (0.05 and .017);      
+    \end{scope}
+    \draw[line width=0.8pt*#1] (B)++(0.75,0.25) --++ (0,-0.45) arc (0:-180:0.75 and 0.3) --+ (0,0.45);
+    \draw[line width=0.8pt*#1] (B)++(0,0.25) ellipse (0.75 and 0.3);
+    \path (A) node[minimum width=1.8cm*#1,minimum height=1cm*#1] (#3) {};
+  \end{scope}
+}
+
+\newcommand{\tube}[3]{
+  coordinate (A);
+  \begin{scope}[scale=#1, line width=3pt*#1, darkgray]
+    \path (A)+(0,2.75) coordinate (B);
+    \fill[color=#2] (B)++(-0.75,-3) arc (180:0:0.75 and 0.2) --++ (0,-2) arc (0:-180:0.75);
+    \fill[color=#2!90!black] (B)++(0,-3) ellipse (0.75 and .2); 
+    \draw (B)++(0.75,0) --++ (0,-5) arc (0:-180:0.75) --+ (0,5);
+    \draw (B)++(0,0) ellipse (0.75 and 0.2);
+    \path (A) node[minimum width=2cm*#1,minimum height=6.25cm*#1] (#3) {};
+  \end{scope}
+}

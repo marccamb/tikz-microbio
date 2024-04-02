@@ -1,0 +1,14 @@
+\documentclass[11pt]{standalone}
+\usepackage[utf8]{inputenc}
+
+\usepackage{tikz} 
+\usetikzlibrary{calc, arrows, patterns, decorations.pathmorphing}
+
+\input{tikz_drawings.tex}
+
+\begin{document}
+\begin{tikzpicture}
+  \path (0,0) \assembly{1}{gray}{a};
+  \path (1,2) \dna{1}{gray}{b}
+\end{tikzpicture}
+\end{document}
