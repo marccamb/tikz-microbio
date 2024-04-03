@@ -3,7 +3,8 @@ A set of tikz drawings for microbiology-related figures.
 
 ### Tikz libraries
 - `\bacteria`, `\bacterium` and `\bactpattern` require to load the [`decoration.pathmorphing` tikz library](https://tikz.dev/tikz-decorations)
-- `\bactpattern` also requires to load the [`pattern` tikz library](https://tikz.dev/library-patterns).
+- `\bactpattern` also requires to load the [`pattern` tikz library](https://tikz.dev/library-patterns)
+- `\dna` requires to load the [`arrows` tikz library](https://tikz.dev/tikz-arrows)
 
 ### Arguments
 Most functions require 3 arguments:
@@ -28,7 +29,7 @@ The code from `tikz_drawings.tex` can be pasted into the preamble of the documen
 \documentclass[11pt]{standalone}                                                                                                                                                                                   
 \usepackage[utf8]{inputenc}
 \usepackage{tikz}                                                                                                                                                                                                  
-\usetikzlibrary{calc, arrows, patterns, decorations.pathmorphing}                                                                                                                                                  
+\usetikzlibrary{arrows, patterns, decorations.pathmorphing}                                                                                                                                                  
                                                                                                                                                                                    
 \input{tikz_drawings.tex}
                                                             
