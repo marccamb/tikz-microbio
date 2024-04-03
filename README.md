@@ -16,7 +16,7 @@ Most functions require 3 arguments:
 ### Usage
 
 ```
-\bacterium{0.5}{blue}{bact1}
+\path (0,0) \bacterium{0.5}{blue}{bact1};
 ```
 The code from `tikz_drawings.tex` can be pasted into the preamble of the document, or added with the `\input{}` command (see example below).
 
