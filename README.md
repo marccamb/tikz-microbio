@@ -2,8 +2,8 @@
 A set of tikz drawings for microbiology-related figures.
 
 ### Tikz libraries
-- `\bacteria` requires to load the [`decoration.pathmorphing` tikz library](https://tikz.dev/tikz-decorations)
-- `\bactpattern` requires to load the [`pattern` tikz library](https://tikz.dev/library-patterns).
+- `\bacteria`, `\bacterium` and `\bactpattern` require to load the [`decoration.pathmorphing` tikz library](https://tikz.dev/tikz-decorations)
+- `\bactpattern` also requires to load the [`pattern` tikz library](https://tikz.dev/library-patterns).
 
 ### Arguments
 Most functions require 3 arguments:
