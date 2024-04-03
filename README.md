@@ -10,7 +10,7 @@ A set of tikz drawings for microbiology-related figures.
 Most functions require 3 arguments:
 1. a scale factor
 2. a color
-3. a name for the node containing the image (facultative)
+3. a name for the node containing the drawing (facultative)
 4. the name of a [`pattern`](https://tikz.dev/library-patterns) for `\bactpattern`
 
 ### Usage
