@@ -2,9 +2,9 @@
 A set of tikz drawings for microbiology-related figures.
 
 ### Tikz libraries
-- `\bacteria`, `\bacterium` and `\bactpattern` require to load the [`decoration.pathmorphing` tikz library](https://tikz.dev/tikz-decorations)
+- `\bacteria`, `\bacterium`, `\bactpattern` and `\dna` require to load the [`decoration.pathmorphing` tikz library](https://tikz.dev/tikz-decorations)
 - `\bactpattern` also requires to load the [`pattern` tikz library](https://tikz.dev/library-patterns)
-- `\dna` requires to load the [`arrows` tikz library](https://tikz.dev/tikz-arrows)
+- `\dna` also requires to load the [`arrows` tikz library](https://tikz.dev/tikz-arrows)
 
 ### Arguments
 Most functions require 3 arguments:
