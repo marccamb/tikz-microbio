@@ -149,6 +149,20 @@
 \end{scope}
 }
 
+\newcommand{\nowater}[3]{
+  coordinate (center);
+  \def\s{#1}
+  \path (center)+(0,\s*1.1) coordinate (a);% Change 1.5 to change the shape of the droplet
+  \path (center)+(0,\s*-0.4) node [circle,draw,fill=#2,#2,minimum size=\s*40pt] (c) {};
+  \draw[#2,fill] (a) -- (tangent cs:node=c,point={(a)},solution=1) --
+    (c.center) -- (tangent cs:node=c,point={(a)},solution=2) -- cycle;
+    
+  \path (center) node[circle, inner sep=\s*30 pt, draw, red!80!white, line width=\s*10pt] {};
+  \draw[red!80!white, line width=\s*10pt] (center)++(45:\s*40pt)--++(-135:\s*80pt);
+  
+  \path (center) node[minimum width=100pt*#1,minimum height=100pt*#1] (#3) {};
+}
+
 \newcommand{\petri}[3]{
   coordinate (A);
   \begin{scope}[scale=2.5*#1, line width=0.8mm*#1, darkgray]
@@ -166,7 +180,7 @@
     \end{scope}
     \draw[line width=0.8mm*#1] (B)++(0.75,0.25) --++ (0,-0.45) arc (0:-180:0.75 and 0.3) --+ (0,0.45);
     \draw[line width=0.8mm*#1] (B)++(0,0.25) ellipse (0.75 and 0.3);
-    \path (A) node[minimum width=1.8cm*#1,minimum height=1cm*#1] (#3) {};
+    \path (A) node[minimum width=4cm*#1,minimum height=2.7cm*#1] (#3) {};
   \end{scope}
 }
 
