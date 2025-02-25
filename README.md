@@ -5,6 +5,7 @@ A set of tikz drawings for microbiology-related figures.
 - `\bacteria`, `\bacterium`, `\bactpattern` and `\dna` require to load the [`decoration.pathmorphing` tikz library](https://tikz.dev/tikz-decorations)
 - `\bactpattern` also requires to load the [`pattern` tikz library](https://tikz.dev/library-patterns)
 - `\dna` also requires to load the [`arrows` tikz library](https://tikz.dev/tikz-arrows)
+- `\nowater` requires to load the [`calc` tikz library](https://tikz.dev/tikz-coordinates#tikz-lib-calc)
 
 ### Arguments
 Most functions require 3 arguments:
@@ -23,7 +24,7 @@ The code from `tikz_drawings.tex` can be pasted into the preamble of the documen
 
 ### Example
 
-![](example.png)
+![](example.jpg)
 
 ```
 \documentclass[11pt]{standalone}                                                                                                                                                                                   
